@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home | Pryme X AI</title>
+<meta name="description" content="AI-powered web development, cyber security, and digital solutions — Pryme X AI operates globally across the United States and Sri Lanka.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink:     { DEFAULT:'#161616', 50:'#EDEDEC', 100:'#1E1E1E', 200:'#262626', 300:'#7A7A7A', 700:'#0D0D0D' },
+          yellow:  { DEFAULT:'#F5C400', 100:'#FFF6D6', 300:'#FFE066', 500:'#F5C400', 600:'#D9AC00', 700:'#A88500' },
+        },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          body: ['"Inter"', 'sans-serif'],
+        },
+      }
+    }
+  }
+</script>
+
+<style>
+  body { font-family:'Inter',sans-serif; background:#161616; color:#EDEDEC; }
+  h1,h2,h3,.font-display { font-family:'Space Grotesk',sans-serif; }
+
+  ::selection { background:#F5C400; color:#161616; }
+  ::-webkit-scrollbar { width:10px; }
+  ::-webkit-scrollbar-track { background:#1E1E1E; }
+  ::-webkit-scrollbar-thumb { background:#F5C400; border-radius:8px; }
+
+  .glass-dark { background:rgba(22,22,22,0.68); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); }
+  .glass-border-glow { box-shadow: inset 0 1px 0 0 rgba(245,196,0,0.3), 0 1px 0 0 rgba(245,196,0,0.12), 0 20px 50px -20px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.08); }
+  .glass-panel { background:rgba(255,255,255,0.04); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border:1px solid rgba(255,255,255,0.08); }
+
+  .card { background:#1E1E1E; border:1px solid rgba(255,255,255,0.07); }
+  .card-hover { transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease, border-color .25s ease; }
+  .card-hover:hover { transform:translateY(-6px); box-shadow:0 24px 48px -18px rgba(0,0,0,0.5); border-color:#F5C400; }
+
+  .btn-yellow { background:#F5C400; color:#161616; transition:all .25s ease; }
+  .btn-yellow:hover { background:#FFE066; box-shadow:0 10px 24px -6px rgba(245,196,0,0.55); transform:translateY(-1px); }
+  .btn-outline-light { border:1.5px solid rgba(255,255,255,0.22); color:#EDEDEC; transition:all .25s ease; }
+  .btn-outline-light:hover { border-color:#F5C400; background:rgba(245,196,0,0.08); }
+
+  .nav-link { position:relative; color:rgba(237,237,236,0.75); transition:color .25s ease; }
+  .nav-link::after { content:''; position:absolute; left:0; bottom:-6px; width:0%; height:2px; background:#F5C400; transition:width .25s ease; }
+  .nav-link:hover, .nav-link.active { color:#F5C400; }
+  .nav-link:hover::after, .nav-link.active::after { width:100%; }
+
+  input:focus, select:focus, textarea:focus { outline:none; border-color:#F5C400 !important; box-shadow:0 0 0 3px rgba(245,196,0,0.18); }
+
+  .accent-line { width:52px; height:3px; background:#F5C400; border-radius:2px; }
+
+  .hero-overlay { background:linear-gradient(100deg, rgba(22,22,22,0.95) 8%, rgba(22,22,22,0.72) 50%, rgba(22,22,22,0.4) 100%); }
+  .tech-grid {
+    background-image:
+      linear-gradient(rgba(245,196,0,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,196,0,0.07) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .glow-orb { position:absolute; border-radius:9999px; filter:blur(90px); pointer-events:none; background:radial-gradient(circle, rgba(245,196,0,0.32) 0%, rgba(245,196,0,0) 70%); }
+
+  @keyframes revealUp    { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes revealLeft  { from { opacity:0; transform:translateX(-22px); } to { opacity:1; transform:translateX(0); } }
+  @keyframes revealRight { from { opacity:0; transform:translateX(22px); } to { opacity:1; transform:translateX(0); } }
+  [data-reveal] { opacity:1; animation:revealUp .7s ease both; }
+  [data-reveal="left"]  { animation-name:revealLeft; }
+  [data-reveal="right"] { animation-name:revealRight; }
+  [data-delay="100"] { animation-delay:.08s; }
+  [data-delay="200"] { animation-delay:.16s; }
+  [data-delay="300"] { animation-delay:.24s; }
+  [data-delay="400"] { animation-delay:.32s; }
+  @media (prefers-reduced-motion: reduce) { [data-reveal] { animation:none; opacity:1; transform:none; } }
+
+  .cursor-dot, .cursor-ring { position:fixed; top:0; left:0; pointer-events:none; border-radius:9999px; transform:translate(-50%,-50%); z-index:9999; }
+  .cursor-dot { width:8px; height:8px; background:#F5C400; transition:transform .12s ease, opacity .2s ease; }
+  .cursor-ring { width:34px; height:34px; border:1.5px solid rgba(245,196,0,0.7); transition:transform .18s cubic-bezier(.2,.8,.2,1), width .2s ease, height .2s ease, opacity .2s ease; }
+  html.has-custom-cursor, html.has-custom-cursor a, html.has-custom-cursor button { cursor:none; }
+  .cursor-ring.hovering { width:52px; height:52px; border-color:#F5C400; background:rgba(245,196,0,0.08); }
+
+  #splashScreen {
+    position:fixed; inset:0; z-index:9998;
+    background:#161616; display:flex; align-items:center; justify-content:center;
+    animation: splashOut .5s ease forwards;
+    animation-delay: .9s;
+  }
+  @keyframes splashOut { to { opacity:0; visibility:hidden; pointer-events:none; } }
+  .splash-logo { animation: splashPulse 1s ease-in-out infinite; }
+  @keyframes splashPulse { 0%,100% { transform:scale(1); opacity:1; } 50% { transform:scale(1.08); opacity:.85; } }
+
+  #pageTransition { position:fixed; inset:0; z-index:9997; background:#161616; opacity:0; pointer-events:none; transition:opacity .35s ease; }
+  #pageTransition.active { opacity:1; }
+
+  .ticker-track { display:flex; width:max-content; animation: tickerScroll 24s linear infinite; }
+  .ticker-track.reverse { animation-direction: reverse; animation-duration: 30s; }
+  @keyframes tickerScroll { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+</style>
+
+</head>
+<body class="antialiased bg-ink">
+
+<div id="splashScreen" aria-hidden="true">
+  <img src="assets/logo_icon.png" alt="Pryme X AI" class="splash-logo w-24 h-24 rounded-2xl">
+</div>
+<div id="pageTransition"></div>
+
+<header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl">
+  <div class="glass-dark glass-border-glow rounded-full px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[64px]">
+    <a href="index.html" class="flex items-center gap-2.5 flex-shrink-0">
+      <img src="assets/logo_icon.png" alt="Pryme X AI logo" class="w-9 h-9 rounded-lg object-cover">
+      <span class="font-display text-base font-bold tracking-tight text-white hidden sm:inline">PRYME <span class="text-yellow-400">X</span> AI</span>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-6">
+      <a href="index.html" class="nav-link active text-sm font-semibold">Home</a>
+      <a href="services.html" class="nav-link text-sm font-semibold">Services</a>
+      <a href="about.html" class="nav-link text-sm font-semibold">About</a>
+      <a href="portfolio.html" class="nav-link text-sm font-semibold">Portfolio</a>
+      <a href="book-a-call.html" class="nav-link text-sm font-semibold">Book a Call</a>
+      <a href="socials.html" class="nav-link text-sm font-semibold">Socials</a>
+      <a href="contact.html" class="nav-link text-sm font-semibold">Contact</a>
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <a href="contact.html" class="hidden md:inline-block btn-yellow px-5 py-2.5 rounded-full text-sm font-bold">Get a Quote</a>
+      <button id="mobileBtn" class="lg:hidden text-white text-xl">
+        <i id="iconOpen" class="fa-solid fa-bars"></i>
+        <i id="iconClose" class="fa-solid fa-xmark hidden"></i>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobileMenu" class="hidden lg:hidden glass-dark glass-border-glow rounded-3xl mt-2 px-4 sm:px-6 py-4">
+    <a href="index.html" class="block py-3 border-b border-white/10 font-semibold text-yellow-500">Home</a>
+      <a href="services.html" class="block py-3 border-b border-white/10 font-semibold text-white/85">Services</a>
+      <a href="about.html" class="block py-3 border-b border-white/10 font-semibold text-white/85">About</a>
+      <a href="portfolio.html" class="block py-3 border-b border-white/10 font-semibold text-white/85">Portfolio</a>
+      <a href="book-a-call.html" class="block py-3 border-b border-white/10 font-semibold text-white/85">Book a Call</a>
+      <a href="socials.html" class="block py-3 border-b border-white/10 font-semibold text-white/85">Socials</a>
+      <a href="contact.html" class="block py-3 border-b border-white/10 font-semibold text-white/85">Contact</a>
+    <a href="contact.html" class="btn-yellow block text-center mt-4 px-5 py-3 rounded-full text-sm font-bold">Get a Quote</a>
+  </div>
+</header>
+
+
+<main class="pt-32">
+
+<!-- ============ HERO: Colombo skyline + tech overlay ============ -->
+<section class="relative min-h-[88vh] flex items-center overflow-hidden -mt-32 pt-32">
+  <div class="absolute inset-0">
+    <img src="https://images.unsplash.com/photo-1561426802-392f5b6290cf?q=80&w=2400&auto=format&fit=crop" alt="Colombo skyline, Sri Lanka" class="w-full h-full object-cover">
+    <div class="absolute inset-0 hero-overlay"></div>
+    <div class="absolute inset-0 tech-grid opacity-50"></div>
+  </div>
+  <div class="glow-orb w-[450px] h-[450px] -top-32 -left-20"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-20 w-full">
+    <div class="max-w-3xl text-white" data-reveal>
+      <span class="inline-flex items-center gap-2 glass-panel text-yellow-400 text-xs font-bold tracking-[0.2em] uppercase px-4 py-2 rounded-full mb-7">
+        <span class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span> Global Operations &middot; United States &amp; Sri Lanka
+      </span>
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.08] font-bold mb-6">
+        AI-Powered Web Development, <span class="text-yellow-400">Cyber Security</span> &amp; Digital Solutions
+      </h1>
+      <p class="text-white/75 text-lg mb-10 leading-relaxed max-w-2xl">
+        Pryme X AI builds, secures, and ships production-grade digital products for clients across the US, UK, and worldwide — engineered from our Colombo studio, delivered on a global standard.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="book-a-call.html" class="btn-yellow px-8 py-4 rounded-full font-bold text-center">Book a Discovery Call</a>
+        <a href="services.html" class="btn-outline-light px-8 py-4 rounded-full font-bold text-center">Explore Our Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIQUID GLASS STATS BOX ============ -->
+<section class="relative z-10 -mt-16 px-4 sm:px-6 lg:px-10">
+  <div class="max-w-6xl mx-auto glass-panel rounded-3xl shadow-2xl shadow-black/40 p-8 sm:p-10 grid grid-cols-2 md:grid-cols-4 gap-6 text-center" data-reveal>
+    <div>
+      <p class="font-display font-extrabold text-3xl sm:text-4xl text-white">150<span class="text-yellow-400">+</span></p>
+      <p class="text-xs uppercase tracking-widest text-white/45 mt-2">Global Clients</p>
+    </div>
+    <div>
+      <p class="font-display font-extrabold text-3xl sm:text-4xl text-white">80<span class="text-yellow-400">+</span></p>
+      <p class="text-xs uppercase tracking-widest text-white/45 mt-2">Projects Delivered</p>
+    </div>
+    <div>
+      <p class="font-display font-extrabold text-3xl sm:text-4xl text-white">99.9<span class="text-yellow-400">%</span></p>
+      <p class="text-xs uppercase tracking-widest text-white/45 mt-2">Security SLA</p>
+    </div>
+    <div>
+      <p class="font-display font-extrabold text-3xl sm:text-4xl text-white">2</p>
+      <p class="text-xs uppercase tracking-widest text-white/45 mt-2">Global HQ Regions</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUSTED BY TICKER ============ -->
+<section class="py-14 overflow-hidden">
+  <p class="text-center text-xs font-bold tracking-[0.3em] uppercase text-white/30 mb-6">Trusted By</p>
+  <div class="relative">
+    <div class="ticker-track">
+      <span class="flex items-center gap-16 px-8">
+        <span class="font-display font-extrabold text-2xl text-white/20 whitespace-nowrap">SAKURAA.LK</span>
+        <span class="font-display font-extrabold text-2xl text-white/20 whitespace-nowrap">JAYANGAICT</span>
+        <span class="font-display font-extrabold text-2xl text-white/20 whitespace-nowrap">SAKURAA.LK</span>
+        <span class="font-display font-extrabold text-2xl text-white/20 whitespace-nowrap">JAYANGAICT</span>
+        <span class="font-display font-extrabold text-2xl text-white/20 whitespace-nowrap">SAKURAA.LK</span>
+        <span class="font-display font-extrabold text-2xl text-white/20 whitespace-nowrap">JAYANGAICT</span>
+      </span>
+      <span class="flex items-center gap-16 px-8" aria-hidden="true">
+        <span class="font-display font-extrabold text-2xl text-white/20 whitespace-nowrap">SAKURAA.LK</span>
+        <span class="font-display font-extrabold text-2xl text-white/20 whitespace-nowrap">JAYANGAICT</span>
+        <span class="font-display font-extrabold text-2xl text-white/20 whitespace-nowrap">SAKURAA.LK</span>
+        <span class="font-display font-extrabold text-2xl text-white/20 whitespace-nowrap">JAYANGAICT</span>
+        <span class="font-display font-extrabold text-2xl text-white/20 whitespace-nowrap">SAKURAA.LK</span>
+        <span class="font-display font-extrabold text-2xl text-white/20 whitespace-nowrap">JAYANGAICT</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AI QUICK WEB DEV SPOTLIGHT ============ -->
+<section class="py-4 pb-20">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10">
+    <div class="glass-panel rounded-3xl p-8 sm:p-12 grid md:grid-cols-5 gap-8 items-center relative overflow-hidden" data-reveal>
+      <div class="absolute inset-0 tech-grid opacity-30"></div>
+      <div class="glow-orb w-[300px] h-[300px] top-0 right-0"></div>
+      <div class="md:col-span-3 relative">
+        <span class="inline-flex items-center gap-2 text-yellow-400 text-xs font-bold tracking-widest uppercase mb-3">
+          <i class="fa-solid fa-bolt"></i> Our Special Service
+        </span>
+        <h2 class="font-display text-2xl sm:text-3xl font-bold text-white mb-3">AI-Powered Quick Web Development</h2>
+        <p class="text-white/65 leading-relaxed">Production-ready websites, built by our AI-augmented pipeline and reviewed by senior engineers, shipped in days instead of months — without compromising on design or performance.</p>
+      </div>
+      <div class="md:col-span-2 flex flex-col gap-3 relative">
+        <a href="book-a-call.html" class="btn-yellow px-6 py-3.5 rounded-full font-bold text-center">Book a Call</a>
+        <a href="services.html" class="btn-outline-light px-6 py-3.5 rounded-full font-bold text-center">See All Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES MARQUEE ============ -->
+<section class="py-14 bg-ink-100 border-y border-white/5 overflow-hidden">
+  <p class="text-center text-xs font-bold tracking-[0.3em] uppercase text-white/30 mb-6">What We Build</p>
+  <div class="relative">
+    <div class="ticker-track reverse">
+      <span class="flex items-center gap-6 px-3">
+        <span class="glass-panel px-6 py-3 rounded-full text-sm font-bold text-white whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-bolt text-yellow-400"></i> AI-Powered Quick Web Development</span>
+        <span class="glass-panel px-6 py-3 rounded-full text-sm font-bold text-white whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-brain text-yellow-400"></i> AI Solutions</span>
+        <span class="glass-panel px-6 py-3 rounded-full text-sm font-bold text-white whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-shield-halved text-yellow-400"></i> Cyber Security</span>
+        <span class="glass-panel px-6 py-3 rounded-full text-sm font-bold text-white whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-code text-yellow-400"></i> Web Development</span>
+        <span class="glass-panel px-6 py-3 rounded-full text-sm font-bold text-white whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-mobile-screen-button text-yellow-400"></i> App Development</span>
+      </span>
+      <span class="flex items-center gap-6 px-3" aria-hidden="true">
+        <span class="glass-panel px-6 py-3 rounded-full text-sm font-bold text-white whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-bolt text-yellow-400"></i> AI-Powered Quick Web Development</span>
+        <span class="glass-panel px-6 py-3 rounded-full text-sm font-bold text-white whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-brain text-yellow-400"></i> AI Solutions</span>
+        <span class="glass-panel px-6 py-3 rounded-full text-sm font-bold text-white whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-shield-halved text-yellow-400"></i> Cyber Security</span>
+        <span class="glass-panel px-6 py-3 rounded-full text-sm font-bold text-white whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-code text-yellow-400"></i> Web Development</span>
+        <span class="glass-panel px-6 py-3 rounded-full text-sm font-bold text-white whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-mobile-screen-button text-yellow-400"></i> App Development</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CORE SERVICES PREVIEW ============ -->
+<section class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-14" data-reveal>
+      <div>
+        <div class="accent-line mb-4"></div>
+        <span class="text-yellow-400 font-bold tracking-[0.2em] uppercase text-xs">What We Do</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold mt-3 text-white">14 Disciplines, One Team</h2>
+      </div>
+      <a href="services.html" class="text-yellow-400 font-bold text-sm inline-flex items-center gap-2 hover:gap-3 transition-all">View all services <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <a href="services.html" class="card card-hover rounded-2xl p-7" data-reveal data-delay="0">
+        <i class="fa-solid fa-brain text-yellow-400 text-2xl mb-5"></i>
+        <h3 class="font-display font-bold text-lg mb-2 text-white">AI Solutions</h3>
+        <p class="text-sm text-white/50">LLM pipelines, multi-agent orchestration, workflow automation.</p>
+      </a>
+      <a href="services.html" class="card card-hover rounded-2xl p-7" data-reveal data-delay="100">
+        <i class="fa-solid fa-shield-halved text-yellow-400 text-2xl mb-5"></i>
+        <h3 class="font-display font-bold text-lg mb-2 text-white">Cyber Security</h3>
+        <p class="text-sm text-white/50">Penetration testing, full-scope audits, architecture shielding.</p>
+      </a>
+      <a href="services.html" class="card card-hover rounded-2xl p-7" data-reveal data-delay="200">
+        <i class="fa-solid fa-code text-yellow-400 text-2xl mb-5"></i>
+        <h3 class="font-display font-bold text-lg mb-2 text-white">Web Development</h3>
+        <p class="text-sm text-white/50">SaaS platforms, Web3 integration, reactive frameworks.</p>
+      </a>
+      <a href="services.html" class="card card-hover rounded-2xl p-7" data-reveal data-delay="0">
+        <i class="fa-solid fa-mobile-screen-button text-yellow-400 text-2xl mb-5"></i>
+        <h3 class="font-display font-bold text-lg mb-2 text-white">App Development</h3>
+        <p class="text-sm text-white/50">Native and cross-platform performance applications.</p>
+      </a>
+      <a href="services.html" class="card card-hover rounded-2xl p-7" data-reveal data-delay="100">
+        <i class="fa-solid fa-pen-nib text-yellow-400 text-2xl mb-5"></i>
+        <h3 class="font-display font-bold text-lg mb-2 text-white">UI / UX Design</h3>
+        <p class="text-sm text-white/50">Figma-to-code pipelines, reusable components, branding.</p>
+      </a>
+      <a href="services.html" class="card card-hover rounded-2xl p-7" data-reveal data-delay="200">
+        <i class="fa-solid fa-cube text-yellow-400 text-2xl mb-5"></i>
+        <h3 class="font-display font-bold text-lg mb-2 text-white">3D Development</h3>
+        <p class="text-sm text-white/50">High-fidelity assets, Blender production, real-time rendering.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="py-24 bg-ink-100 relative overflow-hidden border-t border-white/5">
+  <div class="absolute inset-0 tech-grid opacity-30"></div>
+  <div class="glow-orb w-[400px] h-[400px] top-0 left-1/2 -translate-x-1/2"></div>
+  <div class="relative max-w-4xl mx-auto px-4 sm:px-6 text-center text-white" data-reveal>
+    <h2 class="font-display text-3xl md:text-5xl font-bold mb-6">Let's Build Something <span class="text-yellow-400">Exceptional</span></h2>
+    <p class="text-white/60 text-lg mb-10 max-w-xl mx-auto">Tell us what you're building — we'll respond with a scoped plan within one business day.</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="book-a-call.html" class="btn-yellow px-8 py-4 rounded-full font-bold">Book a Call</a>
+      <a href="portfolio.html" class="btn-outline-light px-8 py-4 rounded-full font-bold">See Our Work</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="bg-ink-700 text-white pt-16 pb-8 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+    <div class="grid md:grid-cols-4 gap-10 mb-12">
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-4">
+          <img src="assets/logo_icon.png" alt="Pryme X AI logo" class="w-10 h-10 rounded-xl object-cover">
+          <span class="font-display text-lg font-bold">PRYME <span class="text-yellow-400">X</span> AI</span>
+        </div>
+        <p class="text-sm text-white/50 leading-relaxed mb-5 max-w-sm">AI-powered web development, software engineering, cybersecurity, and design — operating globally across the United States and Sri Lanka.</p>
+        <div class="flex gap-4 text-lg text-white/45">
+          <a href="https://www.linkedin.com/in/yasiru-nethshan-gunasinghe-990766284/" target="_blank" rel="noopener" class="hover:text-yellow-400 transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://github.com/yasirunethshan" target="_blank" rel="noopener" class="hover:text-yellow-400 transition-colors"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.behance.net/yasiru-nethshan" target="_blank" rel="noopener" class="hover:text-yellow-400 transition-colors"><i class="fa-brands fa-behance"></i></a>
+          <a href="https://www.instagram.com/prymexai/" target="_blank" rel="noopener" class="hover:text-yellow-400 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.tiktok.com/@pryme_x_ai" target="_blank" rel="noopener" class="hover:text-yellow-400 transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="https://www.fiverr.com/s/pdWaPGE" target="_blank" rel="noopener" class="hover:text-yellow-400 transition-colors"><i class="fa-brands fa-square-fiverr"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-bold text-xs tracking-widest uppercase text-yellow-400 mb-4">Company</h4>
+        <ul class="space-y-3 text-sm text-white/55">
+          <li><a href="about.html" class="hover:text-white transition-colors">About &amp; Team</a></li>
+          <li><a href="portfolio.html" class="hover:text-white transition-colors">Portfolio</a></li>
+          <li><a href="socials.html" class="hover:text-white transition-colors">Socials &amp; Reviews</a></li>
+          <li><a href="contact.html" class="hover:text-white transition-colors">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold text-xs tracking-widest uppercase text-yellow-400 mb-4">Get Started</h4>
+        <ul class="space-y-3 text-sm text-white/55">
+          <li><a href="services.html" class="hover:text-white transition-colors">Our Services</a></li>
+          <li><a href="book-a-call.html" class="hover:text-white transition-colors">Book a Call</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-white/35">
+      <p>&copy; 2026 Pryme X AI. All rights reserved.</p>
+      <p>Global HQ &middot; United States &amp; Sri Lanka &middot; 24 Business Hours</p>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  const mobileBtn = document.getElementById('mobileBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const iconOpen = document.getElementById('iconOpen');
+  const iconClose = document.getElementById('iconClose');
+  if (mobileBtn) {
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      iconOpen.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+    });
+  }
+
+  (function () {
+    var isFine = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+    if (!isFine) return;
+    var dot = document.createElement('div'); dot.className = 'cursor-dot';
+    var ring = document.createElement('div'); ring.className = 'cursor-ring';
+    document.body.appendChild(dot); document.body.appendChild(ring);
+    document.documentElement.classList.add('has-custom-cursor');
+    document.addEventListener('mousemove', function (e) {
+      dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+      ring.style.left = e.clientX + 'px'; ring.style.top = e.clientY + 'px';
+    });
+    document.addEventListener('mouseover', function (e) {
+      if (e.target.closest('a, button, input, textarea, select, [role="button"]')) ring.classList.add('hovering');
+    });
+    document.addEventListener('mouseout', function (e) {
+      if (e.target.closest('a, button, input, textarea, select, [role="button"]')) ring.classList.remove('hovering');
+    });
+  })();
+
+  (function () {
+    var overlay = document.getElementById('pageTransition');
+    if (!overlay) return;
+    document.querySelectorAll('a[href]').forEach(function (link) {
+      var href = link.getAttribute('href');
+      if (!href || href.indexOf('http') === 0 || href.indexOf('#') === 0 ||
+          href.indexOf('tel:') === 0 || href.indexOf('mailto:') === 0 ||
+          link.target === '_blank') return;
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        overlay.classList.add('active');
+        setTimeout(function () { window.location.href = href; }, 380);
+      });
+    });
+  })();
+</script>
+
+
+</body>
+</html>
